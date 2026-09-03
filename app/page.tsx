@@ -1,6 +1,8 @@
 import ContactForm from "@/components/contact/contact-form";
+import ContactInfo from "@/components/contact/contact-info";
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
+import { Mail } from "lucide-react";
 
 export default function Home() {
   return (
@@ -76,7 +78,7 @@ export default function Home() {
             </div>
 
             {/* Two-Column Grid: Form + Info */}
-            <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
+            <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center justify-center">
               {/* Form Column */}
               <div className="w-full lg:flex-[1.4]">
                 <ContactForm />
@@ -84,7 +86,7 @@ export default function Home() {
 
               {/* Info & Details Column */}
               <div className="w-full lg:flex-1 flex flex-col gap-6 rounded-2xl border border-border bg-card/30 p-6 md:p-8">
-                {/* Content */}
+                <ContactInfo/>
               </div>
             </div>
           </div>

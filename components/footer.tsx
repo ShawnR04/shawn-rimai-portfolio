@@ -18,7 +18,7 @@ const SOCIAL_LINKS = [
   },
   {
     name: "Email",
-    href: "mailto:your-email@gmail.com",
+    href: "mailto:shawnrimai04@gmail.com",
     icon: SiGmail,
     isExternal: false,
   },
