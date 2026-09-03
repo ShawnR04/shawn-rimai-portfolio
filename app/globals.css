@@ -1,0 +1,46 @@
+@import "tailwindcss";
+/* Makes it so that next-themes can toggle the dark class on the <html> tag*/
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-background: var(--bg-background);
+  --color-card: var(--bg-card);
+  --color-text-primary: var(--text-primary);
+  --color-text-muted: var(--text-muted);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+}
+
+/* Light Mode Colors (Default) */
+:root {
+  --bg-background: #fafafa;
+  --bg-card: #ffffff;
+  --text-primary: #040a11;
+  --text-muted: #6b7280;
+  --primary: #008cea;
+  --primary-foreground: #ffffff;
+  --border: #d9dfe4;
+  --accent: oklch(0.95 0.03 240);
+  --accent-foreground: oklch(0.35 0.14 250);
+}
+
+/* Dark Mode Colors */
+.dark {
+  --bg-background: #1a1a1a;
+  --bg-card: #262626;
+  --text-primary: #fafafa;
+  --text-muted: #a5a5a5;
+  --primary: #249ff3;
+  --primary-foreground: #ffffff;
+  --border: oklch(1 0 0 / 12%);
+  --accent: oklch(0.25 0.06 245);
+  --accent-foreground: oklch(0.97 0.01 245);
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
