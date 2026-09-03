@@ -7,6 +7,8 @@
   --color-card: var(--bg-card);
   --color-text-primary: var(--text-primary);
   --color-text-muted: var(--text-muted);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-border: var(--border);
@@ -20,6 +22,8 @@
   --bg-card: #ffffff;
   --text-primary: #040a11;
   --text-muted: #6b7280;
+  --muted: #f3f4f6;
+  --muted-foreground: #6b7280; /* Your light muted foreground */
   --primary: #008cea;
   --primary-foreground: #ffffff;
   --border: #d9dfe4;
@@ -29,10 +33,12 @@
 
 /* Dark Mode Colors */
 .dark {
-  --bg-background: #0000;
+  --bg-background: #090d16;
   --bg-card: #262626;
   --text-primary: #fafafa;
   --text-muted: #a5a5a5;
+  --muted: #1e293b;
+  --muted-foreground: #a5a5a5; /* Your dark muted foreground */
   --primary: #249ff3;
   --primary-foreground: #ffffff;
   --border: oklch(1 0 0 / 12%);
