@@ -19,21 +19,42 @@ export default function Home() {
           id="about" 
           className="min-h-screen scroll-mt-20 flex flex-col py-10"
         >
-          About
+          <div className="w-full">
+            {/* Section Header */}
+            <div className="mb-8 space-y-2">
+              <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+                About
+              </p>
+            </div>
+          </div>
         </section>
 
         <section 
           id="skills" 
           className="min-h-screen scroll-mt-20 flex flex-col py-10"
         >
-          Skills
+          <div className="w-full">
+            {/* Section Header */}
+            <div className="mb-8 space-y-2">
+              <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+                Skills
+              </p>
+            </div>
+          </div>
         </section>
 
         <section 
           id="projects" 
           className="min-h-screen scroll-mt-20 flex flex-col py-10"
         >
-          Projects
+          <div className="w-full">
+            {/* Section Header */}
+            <div className="mb-8 space-y-2">
+              <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+                Projects
+              </p>
+            </div>
+          </div>
         </section>
 
         <section 

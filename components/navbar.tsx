@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Download, Menu, Moon, Sun, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import ThemeToggle from "./theme-toggle";
 
@@ -16,7 +16,6 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
   const [isOpen, setIsOpen] = useState(false);
-  const [isDark, setIsDark] = useState(false);
 
   // Close drawer on Escape key
   useEffect(() => {
@@ -35,49 +34,44 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
-  // Robust pixel-based Scroll Spy
+  // Halfway Scroll Spy
   useEffect(() => {
     const sectionIds = NAV_LINKS.map((link) => link.href.replace("#", ""));
 
     const handleScroll = () => {
+      // 1. Force the last section (Contact) when at the bottom of the page
       const scrollPosition = window.innerHeight + window.scrollY;
-      const bottomThreshold = document.documentElement.scrollHeight - 70;
-
-      // 1. Catches Contact at the bottom of the page
-      if (scrollPosition >= bottomThreshold) {
-        setActiveSection("contact");
+      const isAtBottom = scrollPosition >= document.documentElement.scrollHeight - 60;
+      if (isAtBottom) {
+        setActiveSection(sectionIds[sectionIds.length - 1]);
         return;
       }
 
-      // 2. Deterministic position detection from bottom to top
-      const triggerLine = 160;
+      // 2. Trigger line: Halfway down the visible viewport (accounting for the 80px navbar)
+      const triggerThreshold = (window.innerHeight - 80) / 2 + 80;
 
+      // 3. Scan from bottom to top; activates when section's top crosses the halfway line
       for (let i = sectionIds.length - 1; i >= 0; i--) {
         const id = sectionIds[i];
         const el = document.getElementById(id);
 
         if (el) {
           const rect = el.getBoundingClientRect();
-          if (rect.top <= triggerLine) {
+          if (rect.top <= triggerThreshold) {
             setActiveSection(id);
             return;
           }
         }
       }
 
-      // Default to the first section if above everything
-      setActiveSection("home");
+      // Default to first section when near the top
+      setActiveSection(sectionIds[0]);
     };
 
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-    document.documentElement.classList.toggle("dark");
-  };
 
   return (
     <>
@@ -117,8 +111,7 @@ export default function Navbar() {
 
             {/* Controls & CTA */}
             <div className="flex items-center gap-2">
-              {/* Dark Mode */}
-              <ThemeToggle/>
+              <ThemeToggle />
             </div>
           </div>
         </div>
@@ -133,8 +126,7 @@ export default function Navbar() {
           </a>
 
           <div className="flex items-center gap-2">
-            {/* Dark Mode */}
-            <ThemeToggle/>
+            <ThemeToggle />
 
             <button
               type="button"
@@ -158,25 +150,26 @@ export default function Navbar() {
       />
 
       {/* Mobile Drawer Menu */}
-      <aside className={`fixed border-l border-border bg-card/80 top-0 right-0 z-50 w-72 max-w-[85vw] h-full flex flex-col p-3 shadow-2xl backdop-blur-xl transition-transform duration-300 ease-in-out md:hidden ${
+      <aside
+        className={`fixed top-0 right-0 z-50 flex h-full w-72 max-w-[85vw] flex-col border-l border-border bg-card/80 p-4 shadow-2xl backdrop-blur-xl transition-transform duration-300 ease-in-out md:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
-    >
+      >
         {/* Drawer Header */}
         <div className="flex items-center justify-between">
-            <span className="flex items-center gap-2.5 text-xl font-bold text-text-primary">
-              <Image src="/favicon.ico" alt="Logo" width={32} height={32} />
-              Shawn.
-            </span>
+          <span className="flex items-center gap-2.5 text-xl font-bold text-foreground">
+            <Image src="/favicon.ico" alt="Logo" width={32} height={32} />
+            Shawn.
+          </span>
 
-            <button
-              type="button"
-              onClick={() => setIsOpen(false)}
-              aria-label="Close menu"
-              className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-card/50 text-foreground transition-colors hover:bg-card cursor-pointer"
-            >
-              <X className="h-5 w-5" />
-            </button>
+          <button
+            type="button"
+            onClick={() => setIsOpen(false)}
+            aria-label="Close menu"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-card/50 text-foreground transition-colors hover:bg-card cursor-pointer"
+          >
+            <X className="h-5 w-5" />
+          </button>
         </div>
 
         {/* Mobile Navigation Links */}
@@ -184,7 +177,7 @@ export default function Navbar() {
           {NAV_LINKS.map((link) => {
             const sectionId = link.href.replace("#", "");
             const isActive = activeSection === sectionId;
-        
+
             return (
               <a
                 key={link.href}
@@ -200,6 +193,9 @@ export default function Navbar() {
                 }`}
               >
                 <span>{link.name}</span>
+                {isActive && (
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                )}
               </a>
             );
           })}
