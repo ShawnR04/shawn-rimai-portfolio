@@ -29,7 +29,7 @@
 
 /* Dark Mode Colors */
 .dark {
-  --bg-background: #1a1a1a;
+  --bg-background: #0000;
   --bg-card: #262626;
   --text-primary: #fafafa;
   --text-muted: #a5a5a5;
@@ -43,4 +43,5 @@
 html {
   scroll-behavior: smooth;
   scrollbar-width: none;
+  background-color: var(--color-background);
 }
