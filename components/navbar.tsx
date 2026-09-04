@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Download } from "lucide-react";
 import Image from "next/image";
 import ThemeToggle from "./theme-toggle";
 
@@ -79,7 +79,7 @@ export default function Navbar() {
       <header className="fixed top-0 left-0 z-40 h-20 w-full backdrop-blur-md bg-background/80 transition-colors">
         {/* Desktop Navigation */}
         <div className="hidden h-full items-center justify-center p-3 md:flex">
-          <div className="mx-auto flex h-full w-[95%] max-w-2xl items-center justify-between rounded-full border border-border bg-card/60 px-4 shadow-sm backdrop-blur-lg">
+          <div className="mx-auto flex h-full w-[95%] max-w-3xl items-center justify-between rounded-full border border-border bg-card/60 px-4 shadow-sm backdrop-blur-lg">
             {/* Logo */}
             <a href="#home" className="flex items-center gap-2">
               <Image src="/favicon.ico" alt="Logo" width={28} height={28} />
@@ -109,9 +109,18 @@ export default function Navbar() {
               })}
             </nav>
 
-            {/* Controls & CTA */}
+            {/* Controls & Download CV */}
             <div className="flex items-center gap-2">
               <ThemeToggle />
+              <a
+                href="/resume.pdf"
+                download
+                aria-label="Download CV"
+                className="inline-flex h-10 items-center justify-center gap-1.5 rounded-xl border border-border bg-card/50 px-3.5 text-xs font-semibold text-foreground transition-all duration-200 hover:border-primary/50 hover:bg-card active:scale-95"
+              >
+                <Download className="size-3.5 text-muted-foreground" />
+                <span>Resume</span>
+              </a>
             </div>
           </div>
         </div>
@@ -151,55 +160,70 @@ export default function Navbar() {
 
       {/* Mobile Drawer Menu */}
       <aside
-        className={`fixed top-0 right-0 z-50 flex h-full w-72 max-w-[85vw] flex-col border-l border-border bg-card/80 p-4 shadow-2xl backdrop-blur-xl transition-transform duration-300 ease-in-out md:hidden ${
+        className={`fixed top-0 right-0 z-50 flex h-full w-72 max-w-[85vw] flex-col justify-between border-l border-border bg-card/80 p-4 shadow-2xl backdrop-blur-xl transition-transform duration-300 ease-in-out md:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* Drawer Header */}
-        <div className="flex items-center justify-between">
-          <span className="flex items-center gap-2.5 text-xl font-bold text-foreground">
-            <Image src="/favicon.ico" alt="Logo" width={32} height={32} />
-            Shawn.
-          </span>
+        <div>
+          {/* Drawer Header */}
+          <div className="flex items-center justify-between">
+            <span className="flex items-center gap-2.5 text-xl font-bold text-foreground">
+              <Image src="/favicon.ico" alt="Logo" width={32} height={32} />
+              Shawn.
+            </span>
 
-          <button
-            type="button"
-            onClick={() => setIsOpen(false)}
-            aria-label="Close menu"
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-card/50 text-foreground transition-colors hover:bg-card cursor-pointer"
-          >
-            <X className="h-5 w-5" />
-          </button>
+            <button
+              type="button"
+              onClick={() => setIsOpen(false)}
+              aria-label="Close menu"
+              className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-card/50 text-foreground transition-colors hover:bg-card cursor-pointer"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
+
+          {/* Mobile Navigation Links */}
+          <nav className="mt-6 flex flex-col gap-1.5">
+            {NAV_LINKS.map((link) => {
+              const sectionId = link.href.replace("#", "");
+              const isActive = activeSection === sectionId;
+
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => {
+                    setActiveSection(sectionId);
+                    setIsOpen(false);
+                  }}
+                  className={`flex items-center justify-between rounded-xl px-4 py-3 text-base transition-all duration-200 active:scale-[0.98] ${
+                    isActive
+                      ? "border border-primary/20 bg-primary/10 font-semibold text-primary"
+                      : "font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                  }`}
+                >
+                  <span>{link.name}</span>
+                  {isActive && (
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                  )}
+                </a>
+              );
+            })}
+          </nav>
         </div>
 
-        {/* Mobile Navigation Links */}
-        <nav className="mt-6 flex flex-col gap-1.5">
-          {NAV_LINKS.map((link) => {
-            const sectionId = link.href.replace("#", "");
-            const isActive = activeSection === sectionId;
-
-            return (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => {
-                  setActiveSection(sectionId);
-                  setIsOpen(false);
-                }}
-                className={`flex items-center justify-between rounded-xl px-4 py-3 text-base transition-all duration-200 active:scale-[0.98] ${
-                  isActive
-                    ? "border border-primary/20 bg-primary/10 font-semibold text-primary"
-                    : "font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                }`}
-              >
-                <span>{link.name}</span>
-                {isActive && (
-                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                )}
-              </a>
-            );
-          })}
-        </nav>
+        {/* Mobile Drawer Footer: Download CV Button */}
+        <div className="pt-4 border-t border-border/40">
+          <a
+            href="/resume.pdf"
+            download
+            onClick={() => setIsOpen(false)}
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-200 hover:opacity-90 active:scale-95"
+          >
+            <Download className="size-4" />
+            <span>Download Resume</span>
+          </a>
+        </div>
       </aside>
     </>
   );
