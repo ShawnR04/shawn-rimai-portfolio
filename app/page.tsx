@@ -8,43 +8,37 @@ import ProjectView from "@/components/projects/project-view";
 import CommitHistory from "@/components/skills/commit-history";
 import CommitMap from "@/components/skills/commit-map";
 import SkillView from "@/components/skills/skill-view";
-
+import ScrollReveal from "@/components/ui/scroll-reveal";
 
 export default function Home() {
   return (
     <>
       <Navbar />
 
-      <main className="min-h-screen pt-20 w-full  max-w-5xl lg:max-w-6xl 2xl:max-w-7xl mx-auto px-4 sm:px-8 md:px-20 lg:px-24">
-        <section 
-          id="home" 
-          className="min-h-[calc(100vh-5rem)] scroll-mt-20"
-        >
-          <HomePage/>
+      <main className="min-h-screen pt-20 w-full max-w-5xl lg:max-w-6xl 2xl:max-w-7xl mx-auto px-4 sm:px-8 md:px-20 lg:px-24">
+        {/* Home */}
+        <section id="home" className="min-h-[calc(100vh-5rem)] scroll-mt-20">
+          <HomePage />
         </section>
 
-        <section 
-          id="about" 
-          className="min-h-screen scroll-mt-20 flex flex-col py-10"
-        >
-          <div className="w-full">
-            {/* Section Header */}
+        {/* About */}
+        <section id="about" className="min-h-screen scroll-mt-20 flex flex-col py-10">
+          <ScrollReveal>
             <div className="mb-8 space-y-2">
               <p className="text-sm font-semibold uppercase tracking-wider text-primary">
                 About
               </p>
             </div>
-          </div>
-          <AboutMe/>
+          </ScrollReveal>
+          <ScrollReveal delay={150}>
+            <AboutMe />
+          </ScrollReveal>
         </section>
 
-        <section 
-          id="skills" 
-          className="min-h-screen scroll-mt-20 flex flex-col py-10"
-        >
-          <div className="w-full">
-            {/* Section Header */}
-            <div className="mb-8 space-y-2">
+        {/* Skills */}
+        <section id="skills" className="min-h-screen scroll-mt-20 flex flex-col py-10 gap-10">
+          <ScrollReveal>
+            <div className="space-y-2">
               <p className="text-sm font-semibold uppercase tracking-wider text-primary">
                 Skills
               </p>
@@ -55,21 +49,21 @@ export default function Home() {
                 A curated collection of tools, frameworks, and technologies I use to build scalable full-stack applications and intuitive interfaces.
               </p>
             </div>
+            <SkillView />
+          </ScrollReveal>
 
-            <SkillView/>
-          </div>
+          <ScrollReveal delay={100}>
+            <CommitHistory />
+          </ScrollReveal>
 
-          <CommitHistory/>
-
-          <CommitMap/>
+          <ScrollReveal delay={150}>
+            <CommitMap />
+          </ScrollReveal>
         </section>
 
-        <section 
-          id="projects" 
-          className="min-h-screen scroll-mt-20 flex flex-col py-10"
-        >
-          <div className="w-full">
-            {/* Section Header */}
+        {/* Projects */}
+        <section id="projects" className="min-h-screen scroll-mt-20 flex flex-col py-10">
+          <ScrollReveal>
             <div className="mb-8 space-y-2">
               <p className="text-sm font-semibold uppercase tracking-wider text-primary">
                 Projects
@@ -81,17 +75,16 @@ export default function Home() {
                 A complete collection of web applications, open-source packages, experiments, and technical architectures I’ve built over time.
               </p>
             </div>
+          </ScrollReveal>
 
-            <ProjectView/>
-          </div>
+          <ScrollReveal delay={150}>
+            <ProjectView />
+          </ScrollReveal>
         </section>
 
-        <section 
-          id="contact" 
-          className="min-h-screen scroll-mt-20 flex flex-col py-10"
-        >
-          <div className="w-full">
-            {/* Section Header */}
+        {/* Contact */}
+        <section id="contact" className="min-h-screen scroll-mt-20 flex flex-col py-10">
+          <ScrollReveal>
             <div className="mb-8 space-y-2">
               <p className="text-sm font-semibold uppercase tracking-wider text-primary">
                 Get In Touch
@@ -103,19 +96,16 @@ export default function Home() {
                 Have a question, a project idea, or just want to talk tech? Drop me a message and I&apos;ll get back to you soon.
               </p>
             </div>
+          </ScrollReveal>
 
-            {/* Two-Column Grid: Form + Info */}
-            <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center justify-center">
-              {/* Form Column */}
-              <div className="w-full lg:flex-[1.4]">
-                <ContactForm />
-              </div>
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start justify-center">
+            <ScrollReveal delay={100} className="w-full lg:flex-[1.4]">
+              <ContactForm />
+            </ScrollReveal>
 
-              {/* Info & Details Column */}
-              <div className="w-full lg:flex-1 flex flex-col gap-6 rounded-2xl border border-border bg-card/30 p-6 md:p-8">
-                <ContactInfo/>
-              </div>
-            </div>
+            <ScrollReveal delay={200} className="w-full lg:flex-1 flex flex-col gap-6 rounded-2xl border border-border bg-card/30 p-6 md:p-8">
+              <ContactInfo />
+            </ScrollReveal>
           </div>
         </section>
       </main>
