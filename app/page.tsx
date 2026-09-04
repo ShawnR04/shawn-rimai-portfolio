@@ -2,6 +2,7 @@ import ContactForm from "@/components/contact/contact-form";
 import ContactInfo from "@/components/contact/contact-info";
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
+import ProjectView from "@/components/projects/project-view";
 import CommitHistory from "@/components/skills/commit-history";
 import CommitMap from "@/components/skills/commit-map";
 import GitHubHeatmap from "@/components/skills/commit-map";
@@ -71,7 +72,15 @@ export default function Home() {
               <p className="text-sm font-semibold uppercase tracking-wider text-primary">
                 Projects
               </p>
+              <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                Project Archive
+              </h2>
+              <p className="max-w-2xl text-base text-muted-foreground sm:text-lg">
+                A complete collection of web applications, open-source packages, experiments, and technical architectures I’ve built over time.
+              </p>
             </div>
+
+            <ProjectView/>
           </div>
         </section>
 
