@@ -5,6 +5,7 @@ import Navbar from "@/components/navbar";
 import CommitHistory from "@/components/skills/commit-history";
 import CommitMap from "@/components/skills/commit-map";
 import GitHubHeatmap from "@/components/skills/commit-map";
+import SkillView from "@/components/skills/skill-view";
 import { Mail } from "lucide-react";
 
 export default function Home() {
@@ -44,7 +45,15 @@ export default function Home() {
               <p className="text-sm font-semibold uppercase tracking-wider text-primary">
                 Skills
               </p>
+              <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                My Skills and Expertise
+              </h2>
+              <p className="max-w-2xl text-base text-muted-foreground sm:text-lg">
+                A curated collection of tools, frameworks, and technologies I use to build scalable full-stack applications and intuitive interfaces.
+              </p>
             </div>
+
+            <SkillView/>
           </div>
 
           <CommitHistory/>
