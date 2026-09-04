@@ -1,27 +1,68 @@
-import ActivityCalendar from 'react-activity-calendar';
+'use client';
 
-const customTheme = {
-  dark: [
-    '#1e232a', // level 0 (empty: dark charcoal with border)
-    '#005c6e', // level 1
-    '#0098a6', // level 2
-    '#00e5ff', // level 3 (vibrant cyan)
-    '#e0ffff', // level 4 (highest: near-white highlight)
-  ],
+import { useEffect, useState } from 'react';
+import { ActivityCalendar, type Activity, type ThemeInput } from 'react-activity-calendar';
+
+const tealTheme: ThemeInput = {
+  dark: ['#161b22', '#004f5e', '#008b9e', '#00e5ff', '#e0ffff'],
 };
 
-export default function CommitMap({ data }) {
+interface CommitMapProps {
+  username?: string;
+}
+
+export default function CommitMap({ username = 'ShawnR04' }: CommitMapProps) {
+  const [data, setData] = useState<Activity[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true;
+    const currentYear = new Date().getFullYear();
+
+    // Added cache: 'no-store' and a timestamp query parameter to bypass edge caching
+    fetch(
+      `https://github-contributions-api.jogruber.de/v4/${username}?y=${currentYear}&t=${Date.now()}`,
+      { cache: 'no-store' }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        if (isMounted) {
+          setData(Array.isArray(res?.contributions) ? res.contributions : []);
+          setLoading(false);
+        }
+      })
+      .catch((err) => {
+        console.error('Failed to fetch contributions:', err);
+        if (isMounted) setLoading(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [username]);
+
+  if (loading) {
+    return (
+      <div className="h-40 w-full max-w-212.5 animate-pulse rounded-2xl border border-neutral-800 bg-[#0d1117]/80" />
+    );
+  }
+
+  if (!data.length) return null;
+
   return (
-    <div className="rounded-xl border border-neutral-800 bg-[#0d1117]/80 p-6 backdrop-blur-md">
-      <ActivityCalendar
-        data={data}
-        theme={customTheme}
-        colorScheme="dark"
-        blockSize={12}
-        blockRadius={3}
-        blockMargin={3}
-        fontSize={12}
-      />
+    <div className="w-full rounded-2xl border border-neutral-800 bg-[#0d1117]/90 p-4 sm:p-6 shadow-xl backdrop-blur-md">
+      <div className="flex w-full justify-center [&_svg]:h-auto [&_svg]:max-w-full [&_rect]:stroke-[#262c36] [&_rect]:stroke-[0.6]">
+        <ActivityCalendar
+          data={data}
+          theme={tealTheme}
+          colorScheme="dark"
+          blockSize={12}
+          blockRadius={3}
+          blockMargin={4}
+          fontSize={12}
+          showWeekdayLabels={false}
+        />
+      </div>
     </div>
   );
 }

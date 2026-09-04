@@ -2,6 +2,9 @@ import ContactForm from "@/components/contact/contact-form";
 import ContactInfo from "@/components/contact/contact-info";
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
+import CommitHistory from "@/components/skills/commit-history";
+import CommitMap from "@/components/skills/commit-map";
+import GitHubHeatmap from "@/components/skills/commit-map";
 import { Mail } from "lucide-react";
 
 export default function Home() {
@@ -43,6 +46,10 @@ export default function Home() {
               </p>
             </div>
           </div>
+
+          <CommitHistory/>
+
+          <CommitMap/>
         </section>
 
         <section 
