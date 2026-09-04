@@ -1,13 +1,14 @@
+import AboutMe from "@/components/about/about-me";
 import ContactForm from "@/components/contact/contact-form";
 import ContactInfo from "@/components/contact/contact-info";
 import Footer from "@/components/footer";
+import HomePage from "@/components/home/home-page";
 import Navbar from "@/components/navbar";
 import ProjectView from "@/components/projects/project-view";
 import CommitHistory from "@/components/skills/commit-history";
 import CommitMap from "@/components/skills/commit-map";
-import GitHubHeatmap from "@/components/skills/commit-map";
 import SkillView from "@/components/skills/skill-view";
-import { Mail } from "lucide-react";
+
 
 export default function Home() {
   return (
@@ -19,7 +20,7 @@ export default function Home() {
           id="home" 
           className="min-h-[calc(100vh-5rem)] scroll-mt-20"
         >
-          Home
+          <HomePage/>
         </section>
 
         <section 
@@ -34,6 +35,7 @@ export default function Home() {
               </p>
             </div>
           </div>
+          <AboutMe/>
         </section>
 
         <section 

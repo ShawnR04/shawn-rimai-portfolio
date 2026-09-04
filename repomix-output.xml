@@ -1,0 +1,2430 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+app/
+  favicon.ico
+  globals.css
+  layout.tsx
+  page.tsx
+components/
+  about/
+    about-me.tsx
+    test.tsx
+  contact/
+    contact-form.tsx
+    contact-info.tsx
+  home/
+    home-page.tsx
+  projects/
+    project-view.tsx
+  skills/
+    commit-history.tsx
+    commit-map.tsx
+    skill-view.tsx
+    skills-accordian.tsx
+    test.tsx
+  footer.tsx
+  navbar.tsx
+  theme-provider.tsx
+  theme-toggle.tsx
+public/
+  projects/
+    ali-bakes-cakes.png
+    canopy-ui-npm.png
+    canopy-ui.png
+    cash-canopy.png
+  favicon.ico
+.gitignore
+AGENTS.md
+CLAUDE.md
+eslint.config.mjs
+next.config.ts
+package.json
+postcss.config.mjs
+README.md
+tailwind.config.ts
+tsconfig.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="components/about/about-me.tsx">
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import { 
+  SiTypescript, 
+  SiNextdotjs, 
+  SiTailwindcss, 
+  SiPostgresql, 
+  SiReact, 
+  SiDrizzle 
+} from 'react-icons/si';
+
+const CORE_STACK = [
+  { name: 'TypeScript', icon: SiTypescript },
+  { name: 'Next.js', icon: SiNextdotjs },
+  { name: 'Tailwind CSS', icon: SiTailwindcss },
+  { name: 'PostgreSQL', icon: SiPostgresql },
+  { name: 'Drizzle ORM', icon: SiDrizzle },
+  { name: 'React Native', icon: SiReact },
+];
+
+export default function AboutMe({ username = 'ShawnR04' }: { username?: string }) {
+  const [repoCount, setRepoCount] = useState<number | null>(null);
+  const year = '2nd';
+
+  useEffect(() => {
+    let isMounted = true;
+
+    fetch(`https://api.github.com/users/${username}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted && typeof data?.public_repos === 'number') {
+          setRepoCount(data.public_repos);
+        }
+      })
+      .catch((err) => {
+        console.error('Failed to fetch public repo count:', err);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [username]);
+
+  return (
+    <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-16 lg:gap-24">
+      {/* Main Grid */}
+      <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12">
+        {/* Left: Interactive Code Terminal Card */}
+        <div className="flex flex-col items-center gap-6 lg:col-span-5">
+          <div className="w-full max-w-sm overflow-hidden rounded-2xl border border-border bg-card/40 shadow-xl backdrop-blur-md">
+            {/* Terminal Top Bar */}
+            <div className="flex items-center justify-between border-b border-border/80 bg-muted/40 px-4 py-2.5">
+              <div className="flex items-center gap-1.5">
+                <div className="size-3 rounded-full bg-red-500/80" />
+                <div className="size-3 rounded-full bg-amber-500/80" />
+                <div className="size-3 rounded-full bg-emerald-500/80" />
+              </div>
+              <span className="font-mono text-xs text-muted-foreground">shawn.config.ts</span>
+              <div className="size-3 opacity-0" />
+            </div>
+
+            {/* Terminal Code Body */}
+            <div className="p-5 font-mono text-xs leading-relaxed text-foreground/90">
+              <p className="text-muted-foreground">// Developer Profile</p>
+              <p className="pt-2">
+                <span className="text-pink-400">const</span>{' '}
+                <span className="text-cyan-300">developer</span> = &#123;
+              </p>
+              <div className="space-y-1 pl-4 pt-1 text-muted-foreground">
+                <p>
+                  name:{' '}
+                  <span className="text-emerald-300">&apos;Shawn Rimai&apos;</span>,
+                </p>
+                <p>
+                  role:{' '}
+                  <span className="text-emerald-300">&apos;Full-Stack Engineer&apos;</span>,
+                </p>
+                <p>
+                  status:{' '}
+                  <span className="text-emerald-300">&apos;Seeking Co-op&apos;</span>,
+                </p>
+                <p>
+                  interests: [
+                  <span className="text-amber-200">&apos;TypeScript&apos;</span>,{' '}
+                  <span className="text-amber-200">&apos;Design Systems&apos;</span>
+                  ],
+                </p>
+                <p>
+                  openSource:{' '}
+                  <span className="text-purple-400">true</span>,
+                </p>
+              </div>
+              <p>&#125;;</p>
+              <p className="pt-2">
+                <span className="text-pink-400">export default</span> developer;
+              </p>
+            </div>
+          </div>
+
+          {/* Quick Stats Pill Grid */}
+          <div className="grid w-full max-w-sm grid-cols-2 gap-3">
+            <div className="rounded-2xl border border-border bg-card/30 p-4 text-center backdrop-blur-sm">
+              <span className="text-2xl font-bold text-foreground">{year}</span>
+              <p className="text-xs text-muted-foreground">Year CS Student</p>
+            </div>
+            <div className="rounded-2xl border border-border bg-card/30 p-4 text-center backdrop-blur-sm">
+              <span className="text-2xl font-bold text-primary">
+                {repoCount !== null ? `${repoCount}` : '...'}
+              </span>
+              <p className="text-xs text-muted-foreground">Shipped Projects</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Right: Narrative Story */}
+        <div className="flex flex-col gap-6 lg:col-span-7">
+          <div className="space-y-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+            <p>
+              Hi, I’m <span className="font-semibold text-foreground">Shawn Rimai</span>. 
+              I’m a Computer Science student and software developer focused on crafting type-safe, resilient applications that balance performance with fluid user interfaces.
+            </p>
+            <p>
+              My development philosophy centers on modular architecture and thoughtful developer experience. Whether I’m designing personal finance platforms like <span className="font-medium text-foreground">Cash Canopy</span>, authoring open-source component systems like <span className="font-medium text-foreground">@marv3l/canopy-ui</span>, or exploring offline-first mobile synchronizations, I care deeply about the details—from clean relational database schemas to smooth micro-interactions.
+            </p>
+            <p>
+              When I’m not coding or refactoring UI components, you can usually find me studying system design, gaming, reading novels and manga, or experimenting with new web toolkits and workflow optimizations.
+            </p>
+          </div>
+
+          {/* Core Technologies Bar */}
+          <div className="space-y-3 pt-4">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              Core Tech Stack
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {CORE_STACK.map((tech) => {
+                const Icon = tech.icon;
+                return (
+                  <div
+                    key={tech.name}
+                    className="flex items-center gap-2 rounded-xl border border-border bg-card/60 px-3.5 py-2 text-sm font-medium text-foreground/90 backdrop-blur-sm"
+                  >
+                    <Icon className="size-4 text-primary" />
+                    <span>{tech.name}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="components/about/test.tsx">
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { 
+  Code2, 
+  Terminal, 
+  Layers, 
+  Cpu, 
+  GraduationCap, 
+  Sparkles,
+  ArrowUpRight 
+} from 'lucide-react';
+import { 
+  SiTypescript, 
+  SiNextdotjs, 
+  SiTailwindcss, 
+  SiPostgresql, 
+  SiReact, 
+  SiDrizzle 
+} from 'react-icons/si';
+
+const HIGHLIGHTS = [
+  {
+    icon: GraduationCap,
+    title: "Education",
+    subtitle: "Computer Science Co-op",
+    description: "Second-year undergraduate student exploring algorithms, systems architecture, and software design patterns.",
+  },
+  {
+    icon: Code2,
+    title: "Full-Stack Web",
+    subtitle: "Modern TypeScript",
+    description: "Building production-ready applications with Next.js, relational schemas, type-safe APIs, and responsive design systems.",
+  },
+  {
+    icon: Layers,
+    title: "UI Architecture",
+    subtitle: "Component Systems",
+    description: "Creating accessible, modular component libraries and developer tooling published to the open-source community.",
+  },
+  {
+    icon: Cpu,
+    title: "Mobile & Systems",
+    subtitle: "Offline-First Sync",
+    description: "Designing resilient cross-platform mobile apps with local database caching and background synchronization.",
+  },
+];
+
+const CORE_STACK = [
+  { name: 'TypeScript', icon: SiTypescript },
+  { name: 'Next.js', icon: SiNextdotjs },
+  { name: 'Tailwind CSS', icon: SiTailwindcss },
+  { name: 'PostgreSQL', icon: SiPostgresql },
+  { name: 'Drizzle ORM', icon: SiDrizzle },
+  { name: 'React Native', icon: SiReact },
+];
+
+export default function AboutMeTest({ username = 'ShawnR04' }: { username?: string }) {
+  const [repoCount, setRepoCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    fetch(`https://api.github.com/users/${username}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted && typeof data?.public_repos === 'number') {
+          setRepoCount(data.public_repos);
+        }
+      })
+      .catch((err) => {
+        console.error('Failed to fetch public repo count:', err);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [username]);
+
+  return (
+    <section className="relative mx-auto flex w-full max-w-6xl flex-col gap-16 px-4 py-12 sm:px-6 lg:gap-24 lg:py-20">
+      {/* Section Header */}
+      <div className="space-y-3">
+        <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+          About Me
+        </p>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+          Bridging solid architecture with polished design.
+        </h1>
+        <p className="max-w-3xl text-base text-muted-foreground sm:text-lg">
+          A closer look at my background, the tools I build with, and what drives my development process.
+        </p>
+      </div>
+
+      {/* Main Grid: Portrait & Bio */}
+      <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12">
+        {/* Left: Portrait / Visual Card */}
+        <div className="flex flex-col items-center gap-6 lg:col-span-5">
+          <div className="relative aspect-square w-full max-w-sm overflow-hidden rounded-3xl border border-border bg-card/40 p-2 shadow-xl backdrop-blur-md">
+            <div className="relative h-full w-full overflow-hidden rounded-2xl bg-muted/20">
+              <Image
+                src="/profile.jpg"
+                alt="Shawn Rimai"
+                fill
+                priority
+                className="object-cover object-center transition-transform duration-500 hover:scale-105"
+                sizes="(max-width: 1024px) 384px, 420px"
+              />
+            </div>
+          </div>
+
+          {/* Quick Stats Pill Grid */}
+          <div className="grid w-full max-w-sm grid-cols-2 gap-3">
+            <div className="rounded-2xl border border-border bg-card/30 p-4 text-center backdrop-blur-sm">
+              <span className="text-2xl font-bold text-foreground">2nd</span>
+              <p className="text-xs text-muted-foreground">Year CS Student</p>
+            </div>
+            <div className="rounded-2xl border border-border bg-card/30 p-4 text-center backdrop-blur-sm">
+              <span className="text-2xl font-bold text-primary">
+                {repoCount !== null ? `${repoCount}+` : '...'}
+              </span>
+              <p className="text-xs text-muted-foreground">Shipped Projects</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Right: Narrative Story */}
+        <div className="flex flex-col gap-6 lg:col-span-7">
+          <div className="space-y-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+            <p>
+              Hi, I’m <span className="font-semibold text-foreground">Shawn Rimai</span>. 
+              I’m a Computer Science student and software developer focused on crafting type-safe, resilient applications that balance performance with fluid user interfaces.
+            </p>
+            <p>
+              My development philosophy centers on modular architecture and thoughtful developer experience. Whether I’m designing personal finance platforms like <span className="font-medium text-foreground">Cash Canopy</span>, authoring open-source component systems like <span className="font-medium text-foreground">@marv3l/canopy-ui</span>, or exploring offline-first mobile synchronizations, I care deeply about the details—from clean relational database schemas to smooth micro-interactions.
+            </p>
+            <p>
+              When I’m not coding or refactoring UI components, you can usually find me studying system design, gaming, or experimenting with new web toolkits and workflow optimizations.
+            </p>
+          </div>
+
+          {/* Core Technologies Bar */}
+          <div className="space-y-3 pt-4">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              Core Tech Stack
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {CORE_STACK.map((tech) => {
+                const Icon = tech.icon;
+                return (
+                  <div
+                    key={tech.name}
+                    className="flex items-center gap-2 rounded-xl border border-border bg-card/60 px-3.5 py-2 text-sm font-medium text-foreground/90 backdrop-blur-sm"
+                  >
+                    <Icon className="size-4 text-primary" />
+                    <span>{tech.name}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Focus Areas & Milestones Grid */}
+      <div className="space-y-6">
+        <div className="space-y-1">
+          <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+            What I Focus On
+          </h2>
+          <p className="text-sm text-muted-foreground sm:text-base">
+            Key areas of software development where I spend the majority of my time building and learning.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {HIGHLIGHTS.map((item) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={item.title}
+                className="group flex flex-col justify-between rounded-2xl border border-border bg-card/30 p-6 transition-all duration-300 hover:border-primary/40 hover:bg-card/50"
+              >
+                <div className="space-y-4">
+                  <div className="inline-flex size-10 items-center justify-center rounded-xl border border-border bg-card/80 text-primary">
+                    <Icon className="size-5" />
+                  </div>
+                  <div className="space-y-1">
+                    <span className="text-xs font-semibold text-primary">
+                      {item.subtitle}
+                    </span>
+                    <h3 className="text-lg font-bold tracking-tight text-foreground">
+                      {item.title}
+                    </h3>
+                  </div>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+</file>
+
+<file path="components/home/home-page.tsx">
+import React from 'react';
+import Image from 'next/image';
+import { FiGithub } from 'react-icons/fi';
+import { FaLinkedinIn } from 'react-icons/fa';
+import { SiGmail } from 'react-icons/si';
+import { ArrowRight, Download } from 'lucide-react';
+
+const SOCIAL_LINKS = [
+  {
+    name: 'GitHub',
+    href: 'https://github.com/ShawnR04',
+    icon: FiGithub,
+  },
+  {
+    name: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/shawn-rimai-a24249279',
+    icon: FaLinkedinIn,
+  },
+  {
+    name: 'Email',
+    href: 'mailto:shawnrimai04@gmail.com',
+    icon: SiGmail,
+    isExternal: false,
+  },
+];
+
+export default function HomePage() {
+  return (
+    <section className="relative flex min-h-[calc(100vh-4rem)] w-full flex-col items-center justify-center gap-12 py-12 text-center lg:flex-row lg:gap-16 lg:py-24 lg:text-left">
+      {/* Content: top on mobile/tablet, left on desktop */}
+      <div className="flex flex-1 flex-col items-center gap-6 lg:items-start">
+        {/* Status Pill */}
+        <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3.5 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur-md">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+          </span>
+          Available for Co-op & Internships
+        </div>
+
+        {/* Intro */}
+        <div className="space-y-2">
+            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+              Shawn Rimai
+            </h1>
+             <h2 className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-xl font-semibold text-transparent sm:text-2xl lg:text-3xl">
+              Full-Stack Software Developer
+            </h2>
+        </div>
+
+        <p className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+          Building resilient web applications, modular UI components, and modern digital experiences using TypeScript, Next.js, and scalable database architectures.
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-wrap items-center justify-center gap-4 pt-1 lg:justify-start">
+          <a
+            href="#contact"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-200 hover:opacity-90 active:scale-95"
+          >
+            Get In Touch
+            <ArrowRight className="size-4" />
+          </a>
+          <a
+            href="/resume.pdf"
+            download
+            className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-card/50 px-5 py-3 text-sm font-medium text-foreground transition-all duration-200 hover:border-primary/50 hover:bg-card active:scale-95"
+          >
+            <Download className="size-4 text-muted-foreground" />
+            Download Resume
+          </a>
+        </div>
+
+        {/* Social Links */}
+        <div className="flex items-center justify-center gap-3 pt-2 lg:justify-start">
+          {SOCIAL_LINKS.map(({ name, href, icon: Icon, isExternal = true }) => (
+            <a
+              key={name}
+              href={href}
+              aria-label={name}
+              {...(isExternal && {
+                target: '_blank',
+                rel: 'noopener noreferrer',
+              })}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-card/50 text-muted-foreground transition-all duration-200 hover:border-primary/50 hover:bg-card hover:text-foreground active:scale-95"
+            >
+              <Icon className="h-5 w-5" />
+            </a>
+          ))}
+        </div>
+      </div>
+
+      {/* Image: bottom on mobile/tablet, right on desktop */}
+      <div className="flex flex-1 items-center justify-center w-full max-w-md lg:max-w-none">
+        <div className="relative aspect-square w-full max-w-xs sm:max-w-sm lg:max-w-md overflow-hidden rounded-3xl border border-border bg-card/40 p-2 shadow-2xl backdrop-blur-md">
+          <div className="relative h-full w-full overflow-hidden rounded-2xl bg-muted/20">
+            <Image
+              src="/profile.jpg"
+              alt="Shawn Rimai"
+              fill
+              priority
+              className="object-cover object-center transition-transform duration-500 hover:scale-105"
+              sizes="(max-width: 768px) 320px, (max-width: 1024px) 384px, 450px"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+</file>
+
+<file path="components/contact/contact-form.tsx">
+import React from "react";
+
+export default function ContactForm() {
+  return (
+    <form className="flex-1 space-y-5 rounded-2xl border border-border bg-card/30 p-6 md:p-10">
+      {/* First Name & Last Name / Email */}
+      <div className="flex flex-col gap-5 md:flex-row">
+        <div className="flex flex-1 flex-col gap-2">
+          <label
+            htmlFor="name"
+            className="px-2 text-sm font-medium text-muted-foreground"
+          >
+            Name
+          </label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            placeholder="John Doe"
+            className="w-full rounded-xl border border-border bg-card/50 p-3 text-foreground placeholder:text-muted-foreground/60 outline-none transition-all duration-150 focus:border-primary focus:ring-1 focus:ring-primary"
+          />
+        </div>
+
+        <div className="flex flex-1 flex-col gap-2">
+          <label
+            htmlFor="email"
+            className="px-2 text-sm font-medium text-muted-foreground"
+          >
+            Email
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            placeholder="john@example.com"
+            className="w-full rounded-xl border border-border bg-card/50 p-3 text-foreground placeholder:text-muted-foreground/60 outline-none transition-all duration-150 focus:border-primary focus:ring-1 focus:ring-primary"
+          />
+        </div>
+      </div>
+
+      {/* Subject */}
+      <div className="flex flex-col gap-2">
+        <label
+          htmlFor="subject"
+          className="px-2 text-sm font-medium text-muted-foreground"
+        >
+          Subject
+        </label>
+        <input
+          id="subject"
+          name="subject"
+          type="text"
+          required
+          placeholder="Project Inquiry / Collaboration"
+          className="w-full rounded-xl border border-border bg-card/50 p-3 text-foreground placeholder:text-muted-foreground/60 outline-none transition-all duration-150 focus:border-primary focus:ring-1 focus:ring-primary"
+        />
+      </div>
+
+      {/* Message */}
+      <div className="flex flex-col gap-2">
+        <label
+          htmlFor="message"
+          className="px-2 text-sm font-medium text-muted-foreground"
+        >
+          Message
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          rows={5}
+          required
+          placeholder="Tell me about your project or inquiry..."
+          className="w-full resize-none rounded-xl border border-border bg-card/50 p-3 text-foreground placeholder:text-muted-foreground/60 outline-none transition-all duration-150 focus:border-primary focus:ring-1 focus:ring-primary"
+        />
+      </div>
+
+      {/* Submit Button */}
+      <button
+        type="submit"
+        className="inline-flex w-full items-center justify-center rounded-xl bg-primary px-6 py-3 font-medium text-primary-foreground shadow-sm transition-all duration-200 hover:opacity-90 active:scale-[0.99] sm:w-auto"
+      >
+        Send Message
+      </button>
+    </form>
+  );
+}
+</file>
+
+<file path="components/contact/contact-info.tsx">
+import { Mail, MapPin } from 'lucide-react';
+import React from 'react'
+
+export default function ContactInfo() {
+  return (
+    <>
+        {/* Availability Status Badge */}
+        <div className="flex flex-col gap-3">
+          <div className="inline-flex items-center gap-2 text-xs font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 w-fit px-3 py-1.5 rounded-full border border-emerald-500/20">
+            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+            Available for Co-op & Full-time Roles
+          </div>
+          
+          <h3 className="text-xl font-bold tracking-tight text-foreground">
+            Let&apos;s build something great
+          </h3>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Whether you have a specific project, an internship opportunity, or just want to chat about architecture and tech, my inbox is always open.
+          </p>
+        </div>
+
+        {/* Direct Info Items */}
+        <div className="flex flex-col gap-5 text-sm">
+          {/* Email */}
+          <div className="flex items-start gap-3.5">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-card/60 text-primary">
+              <Mail className="h-5 w-5"/>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                Email
+              </span>
+              <a href="mailto:shawnrimai04@gmail.com" className="text-xs font-semibold text-foreground hover:text-primary transition-colors mt-0.5">
+                shawnrimai04@gmail.com
+              </a>
+            </div>
+          </div>
+          {/* Location */}
+          <div className="flex items-start gap-3.5">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-card/60 text-primary">
+              <MapPin className="h-5 w-5"/>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                Location
+              </span>
+              <p className="text-xs font-semibold text-foreground hover:text-primary transition-colors mt-0.5">
+                Welland, Ontario, CA
+              </p>
+            </div>
+          </div>
+          {/*  */}
+        </div>
+    </>
+  )
+}
+</file>
+
+<file path="components/projects/project-view.tsx">
+import { MoveUpRight, ShieldCheck, Mail, Database, Smartphone } from 'lucide-react';
+import Image from 'next/image';
+import React from 'react';
+import { FaGithub } from 'react-icons/fa';
+import { 
+  SiNextdotjs, 
+  SiTypescript, 
+  SiTailwindcss, 
+  SiPostgresql, 
+  SiDrizzle, 
+  SiReact, 
+  SiNpm ,
+  SiVercel
+} from 'react-icons/si';
+
+const PROJECTS = [
+  {
+    id: 1,
+    type: "Full-Stack Web App",
+    projectName: "Cash Canopy",
+    desc: "A comprehensive personal finance platform featuring real-time budget analytics, expense tracking with leaf/coin visual themes, and recurring bill notifications.",
+    technologies: [
+      { id: 1, name: "Next.js", icon: SiNextdotjs },
+      { id: 2, name: "TypeScript", icon: SiTypescript },
+      { id: 3, name: "Tailwind CSS", icon: SiTailwindcss },
+      { id: 4, name: "Drizzle ORM", icon: SiDrizzle },
+      { id: 5, name: "Neon Postgres", icon: SiPostgresql },
+      { id: 6, name: "Better Auth", icon: ShieldCheck },
+      { id: 7, name: "Resend", icon: Mail },
+    ],
+    githubRepo: "https://github.com/ShawnR04/cash-canopy-v6",
+    demoLink: "https://cashcanopy.dev",
+    image: "/projects/cash-canopy.png",
+  },
+  {
+    id: 2,
+    type: "Open-Source / NPM Package",
+    projectName: "@marv3l/canopy-ui",
+    desc: "Published React component library and CLI distributed via npm, designed for rapid scaffolding of animated notifications and accessible UI primitives.",
+    technologies: [
+      { id: 1, name: "React", icon: SiReact },
+      { id: 2, name: "TypeScript", icon: SiTypescript },
+      { id: 3, name: "Tailwind CSS", icon: SiTailwindcss },
+      { id: 4, name: "NPM Registry", icon: SiNpm },
+    ],
+    githubRepo: "https://github.com/ShawnR04/canopy-ui",
+    demoLink: "https://www.npmjs.com/package/@marv3l/canopy-ui",
+    image: "/projects/canopy-ui-npm.png",
+  },
+  {
+    id: 3,
+    type: "Documentation Platform",
+    projectName: "Canopy UI Docs",
+    desc: "Official documentation site and interactive playground for Canopy UI, featuring live component previews, API references, and CLI installation guides.",
+    technologies: [
+      { id: 1, name: "Next.js", icon: SiNextdotjs },
+      { id: 2, name: "TypeScript", icon: SiTypescript },
+      { id: 3, name: "Tailwind CSS", icon: SiTailwindcss },
+      { id: 4, name: "Vercel", icon: SiVercel },
+    ],
+    githubRepo: "https://github.com/ShawnR04/canopy-ui-web",
+    demoLink: "https://canopy-ui-web.vercel.app/",
+    image: "/projects/canopy-ui.png",
+  },
+  {
+    id: 4,
+    type: "Client / E-Commerce Web App",
+    projectName: "Ali Bakes Cakes",
+    desc: "A custom bakery showcase and inquiry portal featuring interactive product catalogs, custom order request flows, and responsive visual branding.",
+    technologies: [
+      { id: 1, name: "Next.js", icon: SiNextdotjs },
+      { id: 2, name: "TypeScript", icon: SiTypescript },
+      { id: 3, name: "Tailwind CSS", icon: SiTailwindcss },
+      { id: 4, name: "Vercel", icon: SiVercel },
+    ],
+    githubRepo: "https://github.com/ShawnR04/ali-bakes-cakes",
+    demoLink: "https://ali-bakes-cakes.vercel.app",
+    image: "/projects/ali-bakes-cakes.png",
+  },
+];
+
+export default function ProjectView() {
+  return (
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      {PROJECTS.map((project) => (
+        <div
+          key={project.id}
+          className="flex flex-col overflow-hidden rounded-2xl border-2 border-border bg-card/30 transition-all duration-300 hover:border-primary/40"
+        >
+          {/* Top: Image */}
+          <div className="relative aspect-video w-full overflow-hidden bg-muted/20">
+            <Image
+              src={project.image}
+              alt={project.projectName}
+              fill
+              className="object-cover object-center transition-transform duration-500 hover:scale-105"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          </div>
+
+          {/* Body: flex-1 ensures it fills full card height */}
+          <div className="flex flex-1 flex-col justify-between p-6 sm:p-8">
+            {/* Project Details */}
+            <div className="space-y-4">
+              <div className="space-y-1">
+                <span className="text-xs font-semibold uppercase tracking-wider text-primary">
+                  {project.type}
+                </span>
+                <h3 className="text-2xl font-bold tracking-tight text-foreground">
+                  {project.projectName}
+                </h3>
+                <p className="pt-1 text-sm leading-relaxed text-muted-foreground">
+                  {project.desc}
+                </p>
+              </div>
+
+              {/* Technologies */}
+              <div className="flex flex-wrap gap-2 pt-2">
+                {project.technologies.map((tech) => {
+                  const Icon = tech.icon;
+                  return (
+                    <div
+                      key={tech.id}
+                      className="flex items-center justify-center gap-1.5 rounded-lg border border-border bg-card/80 px-2.5 py-1 text-xs text-muted-foreground"
+                    >
+                      {Icon && <Icon className="size-3.5" />}
+                      <span>{tech.name}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Bottom Corner Actions: mt-auto anchors to the very bottom */}
+            <div className="mt-8 flex flex-wrap items-center justify-end gap-3 pt-2">
+              {project.githubRepo && (
+                <a
+                  href={project.githubRepo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-center gap-2 rounded-xl border border-border bg-card/50 px-4 py-2 text-sm font-medium text-foreground transition-all duration-200 hover:border-primary/40 hover:bg-card/80 active:scale-95"
+                >
+                  <FaGithub className="size-4 text-muted-foreground transition-colors group-hover:text-foreground" />
+                  <span className="text-muted-foreground transition-colors group-hover:text-foreground">
+                    View on GitHub
+                  </span>
+                </a>
+              )}
+
+              {project.demoLink && (
+                <a
+                  href={project.demoLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-200 hover:opacity-90 active:scale-95"
+                >
+                  <span>Demo</span>
+                  <MoveUpRight className="size-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+</file>
+
+<file path="components/skills/commit-history.tsx">
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import { CalendarDays, Flame, GitFork, Users } from 'lucide-react';
+
+
+interface GitHubStats {
+  publicRepos: number;
+  followers: number;
+  contributions: number;
+  memberSince: string;
+}
+
+export default function CommitHistory({ username = 'ShawnR04' }: { username?: string }) {
+  const [stats, setStats] = useState<GitHubStats | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function fetchGitHubData() {
+      try {
+        const [userRes, contribRes] = await Promise.all([
+          fetch(`https://api.github.com/users/${username}`),
+          // Fetch all contribution years across the account lifetime
+          fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=all`),
+        ]);
+
+        const userData = await userRes.json();
+        const contribData = await contribRes.json();
+
+        if (!isMounted) return;
+
+        // Sum contributions across all years from the API's total dictionary
+        const allYearsTotal = contribData?.total
+          ? Object.values(contribData.total).reduce(
+              (acc: number, count) => acc + (typeof count === 'number' ? count : 0),
+              0
+            )
+          : Array.isArray(contribData?.contributions)
+          ? contribData.contributions.reduce(
+              (acc: number, item: { count: number }) => acc + (item?.count || 0),
+              0
+            )
+          : 0;
+
+        const formattedDate = userData?.created_at
+          ? new Date(userData.created_at).toLocaleDateString('en-US', {
+              month: 'short',
+              year: 'numeric',
+            })
+          : '—';
+
+        setStats({
+          publicRepos: userData?.public_repos ?? 0,
+          followers: userData?.followers ?? 0,
+          contributions: allYearsTotal,
+          memberSince: formattedDate,
+        });
+      } catch (err) {
+        console.error('Failed to load GitHub stats:', err);
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    }
+
+    fetchGitHubData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [username]);
+
+  return (
+    <div className="flex flex-col gap-5">
+      <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+        Github Stats
+      </h2>
+
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+        {/* Repositories */}
+        <div className="relative flex items-center justify-between overflow-hidden rounded-2xl border border-border bg-card/30 p-6 [perspective:800px]">
+          <div className="relative z-10 flex flex-col gap-2">
+            <p className="text-sm font-medium tracking-wide text-muted-foreground">
+              Repositories
+            </p>
+            <h1 className="text-5xl font-bold tracking-tight text-foreground">
+              {loading ? '—' : `${stats?.publicRepos ?? 0}`}
+            </h1>
+          </div>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-3 -right-3 z-0 flex items-center justify-center opacity-[0.07] transform-gpu -rotate-12 [transform:rotateX(25deg)_rotateY(-35deg)]"
+          >
+            <GitFork className="size-36 text-foreground" strokeWidth={1} />
+          </div>
+        </div>
+
+        {/* Followers */}
+        <div className="relative flex items-center justify-between overflow-hidden rounded-2xl border border-border bg-card/30 p-6 [perspective:800px]">
+          <div className="relative z-10 flex flex-col gap-2">
+            <p className="text-sm font-medium tracking-wide text-muted-foreground">
+              Followers
+            </p>
+            <h1 className="text-5xl font-bold tracking-tight text-foreground">
+              {loading ? '—' : stats?.followers ?? 0}
+            </h1>
+          </div>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-3 -right-3 z-0 flex items-center justify-center opacity-[0.07] transform-gpu -rotate-12 [transform:rotateX(25deg)_rotateY(-35deg)]"
+          >
+            <Users className="size-36 text-foreground" strokeWidth={1} />
+          </div>
+        </div>
+
+        {/* Total Contributions */}
+        <div className="relative flex items-center justify-between overflow-hidden rounded-2xl border border-border bg-card/30 p-6 [perspective:800px]">
+          <div className="relative z-10 flex flex-col gap-2">
+            <p className="text-sm font-medium tracking-wide text-muted-foreground">
+              Total Contributions
+            </p>
+            <h1 className="text-5xl font-bold tracking-tight text-foreground">
+              {loading ? '—' : `${stats?.contributions ?? 0}`}
+            </h1>
+          </div>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-3 -right-3 z-0 flex items-center justify-center opacity-[0.07] transform-gpu -rotate-12 [transform:rotateX(25deg)_rotateY(-35deg)]"
+          >
+            <Flame className="size-36 text-foreground" strokeWidth={1} />
+          </div>
+        </div>
+
+        {/* Member Since */}
+        <div className="relative flex items-center justify-between overflow-hidden rounded-2xl border border-border bg-card/30 p-6 [perspective:800px]">
+          <div className="relative z-10 flex flex-col gap-2">
+            <p className="text-sm font-medium tracking-wide text-muted-foreground">
+              Member Since
+            </p>
+            <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              {loading ? '—' : stats?.memberSince ?? '—'}
+            </h1>
+          </div>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-3 -right-3 z-0 flex items-center justify-center opacity-[0.07] transform-gpu -rotate-12 [transform:rotateX(25deg)_rotateY(-35deg)]"
+          >
+            <CalendarDays className="size-36 text-foreground" strokeWidth={1} />
+          </div>
+        </div>
+      </div>
+
+      <div className=""></div>
+    </div>
+  );
+}
+</file>
+
+<file path="components/skills/skills-accordian.tsx">
+'use client';
+
+import React, { useState } from 'react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
+import { SiPostgresql, SiDrizzle } from 'react-icons/si';
+
+interface SubSkill {
+  name: string;
+  level: number;
+  deviconPath?: string;
+  customSvg?: React.ReactNode;
+}
+
+interface SkillCategory {
+  id: string;
+  number: string;
+  title: string;
+  skills: SubSkill[];
+}
+
+// Inline SVGs for tools needing specific brand treatments or that lack devicon SVGs
+const FigmaLogo = () => (
+  <svg className="size-5" viewBox="0 0 38 57" fill="none">
+    <path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE" />
+    <path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83" />
+    <path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262" />
+    <path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#F24E1E" />
+    <path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF" />
+  </svg>
+);
+
+const FramerLogo = () => (
+  <svg className="size-5" viewBox="0 0 24 24" fill="#0055FF">
+    <path d="M4 0h16v8h-8zM4 8h8l8 8H4zM4 16h8v8z" />
+  </svg>
+);
+
+const VercelLogo = () => (
+  <svg className="size-4 fill-white" viewBox="0 0 24 24">
+    <path d="M24 22.525H0l12-21.05 12 21.05z" />
+  </svg>
+);
+
+const DrizzleLogo = () => (
+  <SiDrizzle className="size-5 text-[#C5F74F]" />
+);
+
+const skillCategories: SkillCategory[] = [
+  {
+    id: 'languages',
+    number: '01',
+    title: 'Languages',
+    skills: [
+      { name: 'TypeScript', level: 90, deviconPath: 'typescript/typescript-original.svg' },
+      { name: 'JavaScript', level: 90, deviconPath: 'javascript/javascript-original.svg' },
+      { name: 'Python', level: 85, deviconPath: 'python/python-original.svg' },
+      { name: 'Java', level: 80, deviconPath: 'java/java-original.svg' },
+    ],
+  },
+  {
+    id: 'software',
+    number: '02',
+    title: 'Software & Tools',
+    skills: [
+      { name: 'Next.js', level: 90, deviconPath: 'nextjs/nextjs-original.svg' },
+      { name: 'Node.js', level: 50, deviconPath: 'nodejs/nodejs-original.svg' },
+      { name: 'React Native', level: 55, deviconPath: 'react/react-original.svg' },
+      { name: 'Tailwind CSS', level: 95, deviconPath: 'tailwindcss/tailwindcss-original.svg' },
+      { name: 'PostgreSQL', level: 70, deviconPath: 'postgresql/postgresql-original.svg' },
+      { name: 'MySQL', level: 20, deviconPath: 'mysql/mysql-original.svg' },
+      { name: 'DrizzleKit ORM', level: 35, customSvg: <DrizzleLogo /> },
+      { name: 'Vite', level: 46, deviconPath: 'vitejs/vitejs-original.svg' },
+      { name: 'Vercel', level: 85, customSvg: <VercelLogo /> },
+      { name: 'Git', level: 50, deviconPath: 'git/git-original.svg' },
+      { name: 'GitHub', level: 76, deviconPath: 'github/github-original.svg' },
+    ],
+  },
+];
+
+export default function SkillsAccordion() {
+  const [openCategory, setOpenCategory] = useState<string | null>('languages');
+
+  const toggleCategory = (id: string) => {
+    setOpenCategory((prev) => (prev === id ? null : id));
+  };
+
+  return (
+    <div className="flex w-full flex-col gap-4">
+      {skillCategories.map((category) => {
+        const isOpen = openCategory === category.id;
+        const avg =
+          category.skills.length > 0
+            ? Math.round(
+                category.skills.reduce((acc, skill) => acc + skill.level, 0) /
+                  category.skills.length
+              )
+            : 0;
+
+        return (
+          <div
+            key={category.id}
+            className={`w-full rounded-2xl border transition-all duration-300 ${
+              isOpen
+                ? 'border-border bg-card/40 shadow-2xl backdrop-blur-md'
+                : 'border-transparent bg-transparent hover:border-border/40 hover:bg-card/20'
+            }`}
+          >
+            {/* Category Header */}
+            <button
+              onClick={() => toggleCategory(category.id)}
+              className="flex w-full items-center justify-between p-4 text-left transition-colors sm:p-5"
+            >
+              <div className="flex items-center gap-4">
+                <div
+                  className={`flex size-11 items-center justify-center rounded-xl text-sm font-bold transition-colors ${
+                    isOpen
+                      ? 'bg-primary/15 text-primary'
+                      : 'bg-muted/40 text-muted-foreground'
+                  }`}
+                >
+                  {category.number}
+                </div>
+
+                <div className="flex flex-col">
+                  <h3 className="text-xl font-bold tracking-tight text-foreground">
+                    {category.title}
+                  </h3>
+                  <p className="text-xs font-medium text-muted-foreground">
+                    {category.skills.length} skills{' '}
+                    <span className="text-muted-foreground/50">·</span>{' '}
+                    <span className="font-semibold text-primary">avg {avg}%</span>
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-5 sm:gap-7">
+                <div className="hidden items-center gap-3 sm:flex">
+                  <div className="h-1.5 w-24 overflow-hidden rounded-full bg-muted/40">
+                    <div
+                      className="h-full rounded-full bg-primary transition-all duration-500"
+                      style={{ width: `${avg}%` }}
+                    />
+                  </div>
+                  <span className="w-7 text-right text-xs font-medium text-muted-foreground">
+                    {avg}%
+                  </span>
+                </div>
+
+                <div className="flex size-9 items-center justify-center rounded-full border border-border bg-card/60 text-muted-foreground transition-transform">
+                  {isOpen ? (
+                    <ChevronUp className="size-4 text-foreground" />
+                  ) : (
+                    <ChevronDown className="size-4 text-muted-foreground" />
+                  )}
+                </div>
+              </div>
+            </button>
+
+            {/* Skills Grid */}
+            {isOpen && (
+              <div className="border-t border-border/40 px-4 pb-6 pt-4 sm:px-6">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  {category.skills.map((skill) => (
+                    <div
+                      key={skill.name}
+                      className="group relative flex flex-col justify-between rounded-xl border border-border/40 bg-card/30 p-4 transition-all hover:border-border"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          {/* Neutral icon wrapper frame that doesn't override SVG fill colors */}
+                          <div className="flex size-9 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] p-1.5 shadow-sm">
+                            {skill.customSvg ? (
+                              skill.customSvg
+                            ) : skill.deviconPath ? (
+                              <img
+                                src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${skill.deviconPath}`}
+                                alt={skill.name}
+                                className="size-5 object-contain"
+                                loading="lazy"
+                              />
+                            ) : null}
+                          </div>
+                          <span className="text-sm font-semibold text-foreground">
+                            {skill.name}
+                          </span>
+                        </div>
+                        <span className="text-xs font-semibold text-muted-foreground">
+                          {skill.level}%
+                        </span>
+                      </div>
+
+                      <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-muted/30">
+                        <div
+                          className="h-full rounded-full bg-primary transition-all duration-700"
+                          style={{ width: `${skill.level}%` }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+</file>
+
+<file path="components/skills/test.tsx">
+'use client';
+
+import { useEffect, useState } from 'react';
+import { ActivityCalendar, type Activity, type ThemeInput } from 'react-activity-calendar';
+
+const tealTheme: ThemeInput = {
+  dark: [
+    '#171b22', // Level 0: dark pill
+    '#004f5e', // Level 1
+    '#008b9e', // Level 2
+    '#00e5ff', // Level 3: neon cyan
+    '#e0ffff', // Level 4: bright white-cyan
+  ],
+};
+
+interface UserData {
+  contributions: Activity[];
+  totalContributions: number;
+  followers: number;
+  createdAt: string;
+}
+
+export default function CommitCard({ username = 'ShawnR04' }: { username?: string }) {
+  const [data, setData] = useState<UserData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    Promise.all([
+      fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`).then((r) => r.json()),
+      fetch(`https://api.github.com/users/${username}`).then((r) => r.json()),
+    ])
+      .then(([contribRes, userRes]) => {
+        if (!isMounted) return;
+
+        const currentYear = new Date().getFullYear();
+        const total =
+          contribRes?.total?.[currentYear] ??
+          contribRes?.total?.['lastYear'] ??
+          contribRes?.contributions?.reduce((acc: number, c: Activity) => acc + c.count, 0) ??
+          0;
+
+        setData({
+          contributions: contribRes.contributions ?? [],
+          totalContributions: total,
+          followers: userRes.followers ?? 0,
+          createdAt: userRes.created_at
+            ? new Date(userRes.created_at).toLocaleDateString('en-US', {
+                month: 'short',
+                year: 'numeric',
+              })
+            : 'Sep 2024',
+        });
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        if (isMounted) setLoading(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [username]);
+
+  if (loading) {
+    return (
+      <div className="h-64 w-full animate-pulse rounded-2xl border border-white/10 bg-[#0a0d14]/90" />
+    );
+  }
+
+  return (
+    <div className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-[#090d14]/95 p-6 text-white shadow-2xl backdrop-blur-xl">
+      {/* Subtle background star flecks */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-25"
+        style={{
+          backgroundImage:
+            'radial-gradient(#ffffff 1px, transparent 1px), radial-gradient(#38bdf8 1px, transparent 1px)',
+          backgroundSize: '40px 40px, 70px 70px',
+          backgroundPosition: '0 0, 20px 20px',
+        }}
+      />
+
+      <div className="relative z-10 space-y-6">
+        {/* Top Metric Cards */}
+        <div className="grid grid-cols-3 gap-3">
+          <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+            <span className="block text-xs font-medium text-neutral-400">Followers</span>
+            <span className="mt-1 block text-2xl font-bold tracking-tight">
+              {data?.followers ?? 0}
+            </span>
+          </div>
+
+          <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+            <span className="block text-xs font-medium text-neutral-400">Contributions</span>
+            <span className="mt-1 block text-2xl font-bold tracking-tight text-white">
+              {data?.totalContributions ?? 0}+
+            </span>
+          </div>
+
+          <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+            <span className="block text-xs font-medium text-neutral-400">Member since</span>
+            <span className="mt-1 block text-2xl font-bold tracking-tight">
+              {data?.createdAt ?? 'Sep 2024'}
+            </span>
+          </div>
+        </div>
+
+        {/* Scaled Heatmap Container */}
+        <div className="w-full overflow-hidden rounded-xl border border-white/5 bg-black/30 p-4 pt-6">
+          <div className="w-full overflow-x-auto [&_svg]:h-auto [&_svg]:w-full [&_svg]:min-w-[650px] [&_rect]:stroke-[#262c36] [&_rect]:stroke-[0.6]">
+            {data?.contributions && (
+              <ActivityCalendar
+                data={data.contributions}
+                theme={tealTheme}
+                colorScheme="dark"
+                blockSize={13}
+                blockRadius={3}
+                blockMargin={4}
+                fontSize={12}
+                showWeekdayLabels={false}
+              />
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="components/theme-provider.tsx">
+"use client";
+
+import * as React from "react";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+
+export function ThemeProvider({
+  children,
+  ...props
+}: React.ComponentProps<typeof NextThemesProvider>) {
+  return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
+}
+</file>
+
+<file path="components/theme-toggle.tsx">
+"use client";
+
+import { useTheme } from "next-themes";
+import { Moon, Sun } from "lucide-react";
+
+export default function ThemeToggle() {
+    const { setTheme, resolvedTheme } = useTheme();
+
+    const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
+      const nextTheme = resolvedTheme === "dark" ? "light" : "dark";
+
+      // Fallback if browser doesn't support View Transitions or prefers reduced motion
+      if (
+        !document.startViewTransition ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
+        setTheme(nextTheme);
+        return;
+      }
+
+      const { clientX: x, clientY: y } = e;
+      const endRadius = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y)
+      );
+
+      const transition = document.startViewTransition(() => {
+        setTheme(nextTheme);
+      });
+
+      transition.ready.then(() => {
+        const clipPath = [
+          `circle(0px at ${x}px ${y}px)`,
+          `circle(${endRadius}px at ${x}px ${y}px)`,
+        ];
+
+        document.documentElement.animate(
+          {
+            clipPath: resolvedTheme === "dark" ? [...clipPath].reverse() : clipPath,
+          },
+          {
+            duration: 450,
+            easing: "ease-in-out",
+            pseudoElement:
+              resolvedTheme === "dark"
+                ? "::view-transition-old(root)"
+                : "::view-transition-new(root)",
+          }
+        );
+      });
+    };
+  return (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      aria-label="Toggle theme"
+      className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-card/50 text-foreground transition-colors hover:bg-card cursor-pointer"
+    >
+        <Sun className="hidden h-5 w-5 text-yellow-400 dark:block" />
+        <Moon className="block h-5 w-5 text-gray-600 dark:hidden" />
+    </button>
+  )
+}
+</file>
+
+<file path=".gitignore">
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+</file>
+
+<file path="AGENTS.md">
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
+</file>
+
+<file path="CLAUDE.md">
+@AGENTS.md
+</file>
+
+<file path="eslint.config.mjs">
+import { defineConfig, globalIgnores } from "eslint/config";
+import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTs from "eslint-config-next/typescript";
+
+const eslintConfig = defineConfig([
+  ...nextVitals,
+  ...nextTs,
+  // Override default ignores of eslint-config-next.
+  globalIgnores([
+    // Default ignores of eslint-config-next:
+    ".next/**",
+    "out/**",
+    "build/**",
+    "next-env.d.ts",
+  ]),
+]);
+
+export default eslintConfig;
+</file>
+
+<file path="next.config.ts">
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* config options here */
+};
+
+export default nextConfig;
+</file>
+
+<file path="postcss.config.mjs">
+const config = {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+};
+
+export default config;
+</file>
+
+<file path="tailwind.config.ts">
+module.exports = {
+  darkMode: 'class',
+  content: ['./app/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  // ...
+};
+</file>
+
+<file path="tsconfig.json">
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "**/*.mts"
+  ],
+  "exclude": ["node_modules"]
+}
+</file>
+
+<file path="components/skills/skill-view.tsx">
+import React from 'react'
+import SkillsAccordion from './skills-accordian';
+
+export default function SkillView() {
+  return (
+    <>
+        <div className="py-5">
+            <SkillsAccordion/>
+        </div>
+    </>
+  )
+}
+</file>
+
+<file path="components/navbar.tsx">
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
+import Image from "next/image";
+import ThemeToggle from "./theme-toggle";
+
+const NAV_LINKS = [
+  { id: 1, name: "Home", href: "#home" },
+  { id: 2, name: "About", href: "#about" },
+  { id: 3, name: "Skills", href: "#skills" },
+  { id: 4, name: "Projects", href: "#projects" },
+  { id: 5, name: "Contact", href: "#contact" },
+];
+
+export default function Navbar() {
+  const [activeSection, setActiveSection] = useState("home");
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Close drawer on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  // Prevent background scrolling when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "unset";
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
+  // Halfway Scroll Spy
+  useEffect(() => {
+    const sectionIds = NAV_LINKS.map((link) => link.href.replace("#", ""));
+
+    const handleScroll = () => {
+      // 1. Force the last section (Contact) when at the bottom of the page
+      const scrollPosition = window.innerHeight + window.scrollY;
+      const isAtBottom = scrollPosition >= document.documentElement.scrollHeight - 60;
+      if (isAtBottom) {
+        setActiveSection(sectionIds[sectionIds.length - 1]);
+        return;
+      }
+
+      // 2. Trigger line: Halfway down the visible viewport (accounting for the 80px navbar)
+      const triggerThreshold = (window.innerHeight - 80) / 2 + 80;
+
+      // 3. Scan from bottom to top; activates when section's top crosses the halfway line
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const id = sectionIds[i];
+        const el = document.getElementById(id);
+
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= triggerThreshold) {
+            setActiveSection(id);
+            return;
+          }
+        }
+      }
+
+      // Default to first section when near the top
+      setActiveSection(sectionIds[0]);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <>
+      {/* Fixed Header Container */}
+      <header className="fixed top-0 left-0 z-40 h-20 w-full backdrop-blur-md bg-background/80 transition-colors">
+        {/* Desktop Navigation */}
+        <div className="hidden h-full items-center justify-center p-3 md:flex">
+          <div className="mx-auto flex h-full w-[95%] max-w-2xl items-center justify-between rounded-full border border-border bg-card/60 px-4 shadow-sm backdrop-blur-lg">
+            {/* Logo */}
+            <a href="#home" className="flex items-center gap-2">
+              <Image src="/favicon.ico" alt="Logo" width={28} height={28} />
+              <span className="text-lg font-bold tracking-tight text-foreground">
+                Shawn.
+              </span>
+            </a>
+
+            {/* Links */}
+            <nav className="flex h-full items-center gap-1">
+              {NAV_LINKS.map((link) => {
+                const sectionId = link.href.replace("#", "");
+                const isActive = activeSection === sectionId;
+                return (
+                  <a
+                    key={link.id}
+                    href={link.href}
+                    className={`flex h-9 items-center justify-center rounded-full px-4 text-sm font-medium transition-all duration-200 ${
+                      isActive
+                        ? "bg-primary text-primary-foreground shadow-sm"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    }`}
+                  >
+                    {link.name}
+                  </a>
+                );
+              })}
+            </nav>
+
+            {/* Controls & CTA */}
+            <div className="flex items-center gap-2">
+              <ThemeToggle />
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Navigation Header */}
+        <div className="flex h-full items-center justify-between px-4 md:hidden">
+          <a href="#home" className="flex items-center gap-2">
+            <Image src="/favicon.ico" alt="Logo" width={32} height={32} />
+            <span className="text-xl font-bold tracking-tight text-foreground">
+              Shawn.
+            </span>
+          </a>
+
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+
+            <button
+              type="button"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-expanded={isOpen}
+              aria-label="Toggle navigation menu"
+              className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-card/50 text-foreground transition-colors hover:bg-card cursor-pointer"
+            >
+              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Drawer Backdrop */}
+      <div
+        onClick={() => setIsOpen(false)}
+        className={`fixed inset-0 z-40 bg-background/50 backdrop-blur-sm transition-opacity duration-300 md:hidden ${
+          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+      />
+
+      {/* Mobile Drawer Menu */}
+      <aside
+        className={`fixed top-0 right-0 z-50 flex h-full w-72 max-w-[85vw] flex-col border-l border-border bg-card/80 p-4 shadow-2xl backdrop-blur-xl transition-transform duration-300 ease-in-out md:hidden ${
+          isOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        {/* Drawer Header */}
+        <div className="flex items-center justify-between">
+          <span className="flex items-center gap-2.5 text-xl font-bold text-foreground">
+            <Image src="/favicon.ico" alt="Logo" width={32} height={32} />
+            Shawn.
+          </span>
+
+          <button
+            type="button"
+            onClick={() => setIsOpen(false)}
+            aria-label="Close menu"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-card/50 text-foreground transition-colors hover:bg-card cursor-pointer"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        {/* Mobile Navigation Links */}
+        <nav className="mt-6 flex flex-col gap-1.5">
+          {NAV_LINKS.map((link) => {
+            const sectionId = link.href.replace("#", "");
+            const isActive = activeSection === sectionId;
+
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => {
+                  setActiveSection(sectionId);
+                  setIsOpen(false);
+                }}
+                className={`flex items-center justify-between rounded-xl px-4 py-3 text-base transition-all duration-200 active:scale-[0.98] ${
+                  isActive
+                    ? "border border-primary/20 bg-primary/10 font-semibold text-primary"
+                    : "font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                }`}
+              >
+                <span>{link.name}</span>
+                {isActive && (
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                )}
+              </a>
+            );
+          })}
+        </nav>
+      </aside>
+    </>
+  );
+}
+</file>
+
+<file path="README.md">
+# Shawn Rimai — Developer Portfolio
+
+> A clean, responsive portfolio site designed to highlight my work in full-stack development, modern web applications, and UI design. Built using Next.js, TypeScript, and Tailwind CSS.
+
+Built with Next.js, TypeScript, and Tailwind CSS, this portfolio provides a fast, accessible, and polished experience across desktop and mobile devices.
+
+## Tech Stack
+
+### Framework
+
+* Next.js
+* React
+
+### Language
+
+* TypeScript
+
+### Styling
+
+* Tailwind CSS
+
+### Icons
+
+* Lucide React
+
+### Hosting
+
+* Vercel
+
+## Key Features
+
+* Responsive design optimized for desktop, tablet, and mobile devices
+* Mobile-friendly navigation drawer
+* Scroll spy navigation with active section highlighting
+* Dark and light theme support
+* Smooth scrolling between portfolio sections
+* Project showcase for full-stack applications and development work
+* Modern, accessible user interface
+* SEO-friendly page structure and metadata
+* Optimized performance using Next.js features
+* Clean and maintainable component architecture
+
+## Getting Started
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+* Node.js 18 or later
+* npm
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/ShawnR04/portfolio-website
+```
+
+### Navigate to the Project
+
+```bash
+cd portfolio-website
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Start the Development Server
+
+```bash
+npm run dev
+```
+
+Open your browser and visit:
+
+```text
+http://localhost:3000
+```
+
+## Available Scripts
+
+### Development
+
+```bash
+npm run dev
+```
+
+Starts the application in development mode.
+
+### Production Build
+
+```bash
+npm run build
+```
+
+Creates an optimized production build.
+
+### Production Server
+
+```bash
+npm run start
+```
+
+Runs the production build locally.
+
+### Linting
+
+```bash
+npm run lint
+```
+
+Runs the project's linting checks.
+
+## Deployment
+
+This project can be deployed using any platform that supports Next.js applications.
+
+For the simplest deployment experience, Vercel is recommended.
+
+```bash
+npm run build
+```
+
+Ensure all environment variables and production configuration are properly configured before deployment.
+
+## License
+
+This project is licensed under the MIT License.
+
+```text
+MIT License
+
+Copyright (c) 2026 Shawn Rimai
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+```
+</file>
+
+<file path="app/globals.css">
+@import "tailwindcss";
+/* Makes it so that next-themes can toggle the dark class on the <html> tag*/
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-background: var(--bg-background);
+  --color-card: var(--bg-card);
+  --color-text-primary: var(--text-primary);
+  --color-text-muted: var(--text-muted);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+}
+
+/* Light Mode Colors (Default) */
+:root {
+  --bg-background: #fafafa;
+  --bg-card: #ffffff;
+  --text-primary: #040a11;
+  --text-muted: #6b7280;
+  --muted: #f3f4f6;
+  --muted-foreground: #6b7280; /* Your light muted foreground */
+  --primary: #008cea;
+  --primary-foreground: #ffffff;
+  --border: #d9dfe4;
+  --accent: oklch(0.95 0.03 240);
+  --accent-foreground: oklch(0.35 0.14 250);
+}
+
+/* Dark Mode Colors */
+.dark {
+  --bg-background: #090d16;
+  --bg-card: #262626;
+  --text-primary: #fafafa;
+  --text-muted: #a5a5a5;
+  --muted: #1e293b;
+  --muted-foreground: #a5a5a5; /* Your dark muted foreground */
+  --primary: #249ff3;
+  --primary-foreground: #ffffff;
+  --border: oklch(1 0 0 / 12%);
+  --accent: oklch(0.25 0.06 245);
+  --accent-foreground: oklch(0.97 0.01 245);
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  background-color: var(--color-background);
+}
+</file>
+
+<file path="app/layout.tsx">
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Shawn Rimai - Software Engineer",
+  description: "Personal portfolio of Shawn Anotidaishe Rimai, a Software Engineer specializing in scalable web applications, clean architecture, and modern UX design.",
+};
+
+export default function RootLayout({ children }: LayoutProps<"/">) {
+  return (
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange={false}
+        >
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
+</file>
+
+<file path="components/skills/commit-map.tsx">
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useTheme } from 'next-themes';
+import { ActivityCalendar, type Activity, type ThemeInput } from 'react-activity-calendar';
+
+const tealTheme: ThemeInput = {
+  light: ['#ebedf0', '#80deea', '#26c6da', '#00acc1', '#006064'],
+  dark: ['#161b22', '#004f5e', '#008b9e', '#00e5ff', '#e0ffff'],
+};
+
+interface CommitMapProps {
+  username?: string;
+}
+
+export default function CommitMap({ username = 'ShawnR04' }: CommitMapProps) {
+  const [data, setData] = useState<Activity[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+    let isMounted = true;
+    const currentYear = new Date().getFullYear();
+
+    fetch(
+      `https://github-contributions-api.jogruber.de/v4/${username}?y=${currentYear}&t=${Date.now()}`,
+      { cache: 'no-store' }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        if (isMounted) {
+          setData(Array.isArray(res?.contributions) ? res.contributions : []);
+          setLoading(false);
+        }
+      })
+      .catch((err) => {
+        console.error('Failed to fetch contributions:', err);
+        if (isMounted) setLoading(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [username]);
+
+  // Loading Skeleton
+  if (loading) {
+    return (
+      <div className="h-44 w-full animate-pulse rounded-2xl border border-border bg-card/40" />
+    );
+  }
+
+  if (!data.length) return null;
+
+  // Resolve active theme safely (defaults to 'dark' before hydration)
+  const currentScheme = mounted && resolvedTheme === 'light' ? 'light' : 'dark';
+
+  return (
+    <div className="w-full rounded-2xl border border-border bg-card/40 p-4 shadow-xl backdrop-blur-md transition-colors duration-300 sm:p-6">
+      <div className="flex w-full justify-center [&_svg]:h-auto [&_svg]:max-w-full [&_rect]:stroke-border/50 [&_rect]:stroke-[0.6] [&_text]:fill-muted-foreground">
+        <ActivityCalendar
+          data={data}
+          theme={tealTheme}
+          colorScheme={currentScheme}
+          blockSize={12}
+          blockRadius={3}
+          blockMargin={4}
+          fontSize={12}
+          showWeekdayLabels={false}
+        />
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="components/footer.tsx">
+import Image from 'next/image';
+import React from 'react'
+import { FiGithub } from "react-icons/fi";
+import { FaLinkedinIn } from "react-icons/fa";
+import { SiGmail } from 'react-icons/si';
+import { FaInstagram } from 'react-icons/fa6';
+
+const SOCIAL_LINKS = [
+  {
+    name: "GitHub",
+    href: "https://github.com/ShawnR04",
+    icon: FiGithub,
+  },
+  {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/in/shawn-rimai-a24249279",
+    icon: FaLinkedinIn,
+  },
+  {
+    name: "Email",
+    href: "mailto:shawnrimai04@gmail.com",
+    icon: SiGmail,
+    isExternal: false,
+  },
+];
+
+export default function Footer() {
+  return (
+    <footer className="w-full border-t border-border bg-card/40 py-10 px-4">
+      <div className="mx-auto flex max-w-5xl flex-col items-center justify-center gap-4 text-center">
+        {/* Logo & Name */}
+        <div className="flex flex-col items-center gap-2">
+          <Image
+            src="/favicon.ico"
+            alt="Shawn Anotidaishe Rimai Logo"
+            width={44}
+            height={44}
+            className="rounded-lg"
+          />
+          <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+            Shawn Anotidaishe Rimai
+          </h3>
+        </div>
+
+        {/* Bio / Value Prop */}
+        <p className="max-w-md text-base text-muted-foreground leading-relaxed">
+          Software Engineer crafting scalable full-stack applications with a sharp eye for responsive, accessible user interfaces.
+        </p>
+
+        <div className="flex items-center gap-3">
+          {SOCIAL_LINKS.map(({ name, href, icon: Icon, isExternal = true }) => (
+            <a
+              key={name}
+              href={href}
+              aria-label={name}
+              {...(isExternal && {
+                target: "_blank",
+                rel: "noopener noreferrer",
+              })}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-card/50 text-muted-foreground transition-all duration-200 hover:border-primary/50 hover:bg-card hover:text-foreground"
+            >
+              <Icon className="h-5 w-5" />
+            </a>
+          ))}
+        </div>
+
+        {/* Subtle Hairline Divider */}
+        <div className="my-2 h-px w-200 bg-border" />
+
+        {/* Copyright */}
+        <p className="text-xs sm:text-sm text-muted-foreground/70">
+          &copy; 2026 Shawn Anotidaishe Rimai. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  )
+}
+</file>
+
+<file path="package.json">
+{
+  "name": "portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "lucide-react": "^1.40.0",
+    "next": "16.3.4",
+    "next-themes": "^0.4.6",
+    "react": "19.2.8",
+    "react-activity-calendar": "^3.2.1",
+    "react-calendar-heatmap": "^1.10.0",
+    "react-contribution-calendar": "^2.0.4",
+    "react-dom": "19.2.8",
+    "react-github-calendar": "^5.0.9",
+    "react-icons": "^5.7.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.4",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
+</file>
+
+<file path="app/page.tsx">
+import AboutMe from "@/components/about/about-me";
+import AboutMeTest from "@/components/about/test";
+import ContactForm from "@/components/contact/contact-form";
+import ContactInfo from "@/components/contact/contact-info";
+import Footer from "@/components/footer";
+import HomePage from "@/components/home/home-page";
+import Navbar from "@/components/navbar";
+import ProjectView from "@/components/projects/project-view";
+import CommitHistory from "@/components/skills/commit-history";
+import CommitMap from "@/components/skills/commit-map";
+import GitHubHeatmap from "@/components/skills/commit-map";
+import SkillView from "@/components/skills/skill-view";
+import { Mail } from "lucide-react";
+
+export default function Home() {
+  return (
+    <>
+      <Navbar />
+
+      <main className="min-h-screen pt-20 w-full  max-w-5xl lg:max-w-6xl 2xl:max-w-7xl mx-auto px-4 sm:px-8 md:px-20 lg:px-24">
+        <section 
+          id="home" 
+          className="min-h-[calc(100vh-5rem)] scroll-mt-20"
+        >
+          <HomePage/>
+        </section>
+
+        <section 
+          id="about" 
+          className="min-h-screen scroll-mt-20 flex flex-col py-10"
+        >
+          <div className="w-full">
+            {/* Section Header */}
+            <div className="mb-8 space-y-2">
+              <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+                About
+              </p>
+            </div>
+          </div>
+          <AboutMe/>
+        </section>
+
+        <section 
+          id="skills" 
+          className="min-h-screen scroll-mt-20 flex flex-col py-10"
+        >
+          <div className="w-full">
+            {/* Section Header */}
+            <div className="mb-8 space-y-2">
+              <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+                Skills
+              </p>
+              <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                My Skills and Expertise
+              </h2>
+              <p className="max-w-2xl text-base text-muted-foreground sm:text-lg">
+                A curated collection of tools, frameworks, and technologies I use to build scalable full-stack applications and intuitive interfaces.
+              </p>
+            </div>
+
+            <SkillView/>
+          </div>
+
+          <CommitHistory/>
+
+          <CommitMap/>
+        </section>
+
+        <section 
+          id="projects" 
+          className="min-h-screen scroll-mt-20 flex flex-col py-10"
+        >
+          <div className="w-full">
+            {/* Section Header */}
+            <div className="mb-8 space-y-2">
+              <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+                Projects
+              </p>
+              <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                Project Archive
+              </h2>
+              <p className="max-w-2xl text-base text-muted-foreground sm:text-lg">
+                A complete collection of web applications, open-source packages, experiments, and technical architectures I’ve built over time.
+              </p>
+            </div>
+
+            <ProjectView/>
+          </div>
+        </section>
+
+        <section 
+          id="contact" 
+          className="min-h-screen scroll-mt-20 flex flex-col py-10"
+        >
+          <div className="w-full">
+            {/* Section Header */}
+            <div className="mb-8 space-y-2">
+              <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+                Get In Touch
+              </p>
+              <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                Let&apos;s Connect
+              </h2>
+              <p className="max-w-xl text-base text-muted-foreground">
+                Have a question, a project idea, or just want to talk tech? Drop me a message and I&apos;ll get back to you soon.
+              </p>
+            </div>
+
+            {/* Two-Column Grid: Form + Info */}
+            <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center justify-center">
+              {/* Form Column */}
+              <div className="w-full lg:flex-[1.4]">
+                <ContactForm />
+              </div>
+
+              {/* Info & Details Column */}
+              <div className="w-full lg:flex-1 flex flex-col gap-6 rounded-2xl border border-border bg-card/30 p-6 md:p-8">
+                <ContactInfo/>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </>
+  );
+}
+</file>
+
+</files>
