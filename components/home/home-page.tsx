@@ -16,9 +16,9 @@ export default function HomePage() {
     <section className="relative flex min-h-[calc(100vh-4rem)] w-full flex-col items-center justify-center gap-12 py-12 text-center lg:flex-row lg:gap-16 lg:py-24 lg:text-left">
       {/* Content Column */}
       <div className="flex flex-1 flex-col items-center gap-6 lg:items-start">
-        {/* Status Pill - 100ms delay */}
+        {/* Status Pill */}
         <div 
-          className="animate-fade-in-up opacity-0 inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3.5 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur-md"
+          className="animate-fade-in-up inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3.5 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur-md"
           style={{ animationDelay: '100ms' }}
         >
           <span className="relative flex h-2 w-2">
@@ -28,7 +28,7 @@ export default function HomePage() {
           Available for Co-op & Internships
         </div>
 
-        {/* Intro Headings - 200ms delay */}
+        {/* Intro Headings */}
         <div 
           className="animate-fade-in-up space-y-2"
           style={{ animationDelay: '200ms' }}
@@ -41,17 +41,17 @@ export default function HomePage() {
           </h2>
         </div>
 
-        {/* Body Paragraph - 300ms delay */}
+        {/* Body Paragraph */}
         <p 
-          className="animate-fade-in-up opacity-0 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
+          className="animate-fade-in-up max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
           style={{ animationDelay: '300ms' }}
         >
           Building resilient web applications, modular UI components, and modern digital experiences using TypeScript, Next.js, and scalable database architectures.
         </p>
 
-        {/* CTA Buttons - 400ms delay */}
+        {/* CTA Buttons */}
         <div 
-          className="animate-fade-in-up opacity-0 flex flex-wrap items-center justify-center gap-4 pt-1 lg:justify-start"
+          className="animate-fade-in-up flex flex-wrap items-center justify-center gap-4 pt-1 lg:justify-start"
           style={{ animationDelay: '400ms' }}
         >
           <a
@@ -71,9 +71,9 @@ export default function HomePage() {
           </a>
         </div>
 
-        {/* Social Icons - 500ms delay */}
+        {/* Social Icons */}
         <div 
-          className="animate-fade-in-up opacity-0 flex items-center justify-center gap-3 pt-2 lg:justify-start"
+          className="animate-fade-in-up flex items-center justify-center gap-3 pt-2 lg:justify-start"
           style={{ animationDelay: '500ms' }}
         >
           {SOCIAL_LINKS.map(({ name, href, icon: Icon, isExternal = true }) => (
@@ -93,20 +93,20 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Hero Image - 250ms fade */}
+      {/* Hero Image */}
       <div 
-        className="animate-fade-in opacity-0 flex flex-1 items-center justify-center w-full max-w-md lg:max-w-none"
+        className="animate-fade-in flex flex-1 items-center justify-center w-full max-w-md lg:max-w-none"
         style={{ animationDelay: '250ms' }}
       >
-        <div className="relative aspect-square w-full max-w-xs sm:max-w-sm lg:max-w-md overflow-hidden rounded-3xl border border-border bg-card/40 p-2 shadow-2xl backdrop-blur-md transition-transform duration-500 hover:scale-[1.02]">
+        <div className="group relative aspect-[4/5] w-full max-w-xs sm:max-w-sm lg:max-w-[360px] overflow-hidden rounded-3xl border border-border bg-card/40 p-2 shadow-2xl backdrop-blur-md transition-transform duration-500 hover:scale-[1.02]">
           <div className="relative h-full w-full overflow-hidden rounded-2xl bg-muted/20">
             <Image
-              src="/profile.jpg"
+              src="/profile.jpeg"
               alt="Shawn Rimai"
               fill
               priority
-              className="object-cover object-center transition-transform duration-500 hover:scale-105"
-              sizes="(max-width: 768px) 320px, (max-width: 1024px) 384px, 450px"
+              className="object-cover object-[center_18%] grayscale-0 transition-all duration-500 ease-out md:grayscale md:contrast-105 md:group-hover:grayscale-0 group-hover:scale-105"
+              sizes="(max-width: 768px) 320px, (max-width: 1024px) 384px, 420px"
             />
           </div>
         </div>
